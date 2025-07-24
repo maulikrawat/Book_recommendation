@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" xintegrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white; /* Ensure default text is white */
+        }
+        .text-white {
+            color: white !important; /* Important to override Bootstrap defaults */
+        }
+        .navbar {
+            background-color: #00a65a; /* Updated to green */
+            border-bottom: none; /* Remove default navbar border */
+            border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            padding: 15px 0; /* Add vertical padding */
+        }
+        .navbar-brand {
+            color: white !important;
+            font-size: 28px; /* Larger font for brand */
+            font-weight: 700; /* Bold */
+            padding: 15px 15px; /* Adjust padding */
+        }
+        .navbar-nav > li > a {
+            color: white !important;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px 20px; /* Adjust link padding */
+            transition: background-color 0.3s ease;
+        }
+        .navbar-nav > li > a:hover,
+        .navbar-nav > li > a:focus {
+            background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+            border-radius: 8px; /* Rounded hover background */
+        }
+        h1 {
+            font-size: 60px; /* Larger main heading */
+            font-weight: 800; /* Extra bold */
+            margin-top: 60px; /* More space above heading */
+            margin-bottom: 40px; /* More space below heading */
+            text-shadow: 2px 2px 5px rgba(0, 255, 0, 0.3); /* Greenish text shadow */
+        }
+        .card {
+            background-color: #1a1a1a; /* Darker background for cards */
+            border: 1px solid #333; /* Subtle border */
+            border-radius: 15px; /* More rounded corners */
+            overflow: hidden; /* Ensures image corners match card */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+            margin-bottom: 30px; /* Spacing between cards */
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02); /* Lift and slightly enlarge card on hover */
+            box-shadow: 0 12px 24px rgba(0, 255, 0, 0.4); /* Glowing shadow on hover */
+        }
+        .card-img-top {
+            width: 100%;
+            height: 300px; /* Slightly taller images for impact */
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom: 1px solid #333; /* Separator for image */
+        }
+        .card-body {
+            padding: 20px; /* More padding inside card body */
+        }
+        .card-body p {
+            font-size: 22px; /* Larger book title */
+            font-weight: 600; /* Semi-bold */
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .card-body h4 {
+            font-size: 18px; /* Slightly larger author/votes/rating */
+            color: #b0b0b0; /* Lighter grey for secondary info */
+            margin-bottom: 5px;
+        }
+        .card-body h4:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Form styling */
+        .form-control {
+            background-color: #333 !important; /* Darker background for input */
+            color: white !important; /* White text for input */
+            border: 1px solid #555 !important; /* Subtle border */
+            border-radius: 8px !important; /* Rounded corners for input */
+            padding: 12px 15px !important; /* More padding */
+            font-size: 18px !important; /* Larger font size */
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2); /* Inner shadow */
+            margin-bottom: 20px; /* Space below input */
+        }
+        .form-control::placeholder {
+            color: #888 !important; /* Placeholder color */
+        }
+        .btn-custom-green {
+            background-color: #00a65a; /* Matching navbar green */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-custom-green:hover,
+        .btn-custom-green:focus {
+            background-color: #008f4c; /* Darker green on hover/focus */
+            transform: translateY(-2px); /* Slight lift on hover */
+            color: white; /* Ensure text color remains white on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .navbar-brand {
+                font-size: 24px;
+            }
+            .navbar-nav > li > a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+            h1 {
+                font-size: 40px;
+                margin-top: 40px;
+                margin-bottom: 30px;
+            }
+            .card {
+                margin-top: 30px; /* Adjust margin for smaller screens */
+            }
+            .card-img-top {
+                height: 250px; /* Adjust image height for smaller screens */
+            }
+            .card-body p {
+                font-size: 20px;
+            }
+            .card-body h4 {
+                font-size: 16px;
+            }
+            .form-control {
+                font-size: 16px !important;
+                padding: 10px 12px !important;
+            }
+            .btn-custom-green {
+                font-size: 18px;
+                padding: 10px 25px;
+            }
+        }
+    </style>
+</head>
+<body style="background-color:black">
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">My Book recommender</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row text-center"> <!-- Added text-center for main heading and form -->
+            <div class="col-md-12">
+                <h1>Recommend Books</h1>
+                <form action="/recommend_books" method="post" class="mt-8 mb-10">
+                    <input name="user_input" type="text" class="form-control" placeholder="Enter a book name...">
+                    <br>
+                    <input type="submit" class="btn btn-lg btn-custom-green" value="Get Recommendations">
+                </form>
+            </div>
+
+            <!-- Placeholder for Jinja2 'data' loop - demonstrating 3 recommended books -->
+            {% if data %}
+             {% for i in data %}
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top:50px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{i[2]}}" onerror="this.onerror=null;this.src='https://placehold.co/300x450/7f8c8d/ffffff?text=Image+Missing';" alt="Book Cover - {{i[0]}}">
+                            <p class="text-white">{{i[0]}}</p>
+                            <h4 class="text-white">{{i[1]}}</h4>
+                        </div>
+                    </div>
+                </div>
+             {% endfor %}
+            {% else %}
+                <!-- Static placeholder for when no data is provided by the backend -->
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top:50px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://placehold.co/300x450/FF5733/FFFFFF?text=Rec+Book+1" onerror="this.onerror=null;this.src='https://placehold.co/300x450/7f8c8d/ffffff?text=Image+Missing';" alt="Recommended Book Cover 1">
+                            <p class="text-white">The Book of Wonders</p>
+                            <h4 class="text-white">Author One</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top:50px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://placehold.co/300x450/33FF57/FFFFFF?text=Rec+Book+2" onerror="this.onerror=null;this.src='https://placehold.co/300x450/7f8c8d/ffffff?text=Image+Missing';" alt="Recommended Book Cover 2">
+                            <p class="text-white">Journey to the Stars</p>
+                            <h4 class="text-white">Author Two</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-top:50px">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="card-img-top" src="https://placehold.co/300x450/3357FF/FFFFFF?text=Rec+Book+3" onerror="this.onerror=null;this.src='https://placehold.co/300x450/7f8c8d/ffffff?text=Image+Missing';" alt="Recommended Book Cover 3">
+                            <p class="text-white">Whispers in the Dark</p>
+                            <h4 class="text-white">Author Three</h4>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+</html>
